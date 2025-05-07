@@ -39,13 +39,16 @@
             LblWeather = new Label();
             picWeather = new PictureBox();
             monthCalendar1 = new MonthCalendar();
-            cboMood = new ComboBox();
-            picMood = new PictureBox();
             LblSelectDate = new Label();
-            LblMood = new Label();
+            txtDiary = new TextBox();
+            label1 = new Label();
+            clbTasks = new CheckedListBox();
+            label2 = new Label();
+            txtTask = new TextBox();
+            btnAdd = new Button();
+            btnDel = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picWeather).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)picMood).BeginInit();
             SuspendLayout();
             // 
             // LblDate
@@ -133,52 +136,94 @@
             monthCalendar1.TabIndex = 6;
             monthCalendar1.DateSelected += monthCalendar1_DateSelected;
             // 
-            // cboMood
-            // 
-            cboMood.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboMood.FormattingEnabled = true;
-            cboMood.Items.AddRange(new object[] { "행복", "보통", "우울", "나쁨" });
-            cboMood.Location = new Point(524, 85);
-            cboMood.Name = "cboMood";
-            cboMood.Size = new Size(48, 23);
-            cboMood.TabIndex = 2;
-            // 
-            // picMood
-            // 
-            picMood.Location = new Point(492, 85);
-            picMood.Name = "picMood";
-            picMood.Size = new Size(24, 24);
-            picMood.TabIndex = 1;
-            picMood.TabStop = false;
-            // 
             // LblSelectDate
             // 
             LblSelectDate.AutoSize = true;
-            LblSelectDate.Location = new Point(290, 89);
+            LblSelectDate.Location = new Point(291, 85);
             LblSelectDate.Name = "LblSelectDate";
             LblSelectDate.Size = new Size(38, 15);
             LblSelectDate.TabIndex = 7;
             LblSelectDate.Text = "날짜 :";
             // 
-            // LblMood
+            // txtDiary
             // 
-            LblMood.AutoSize = true;
-            LblMood.Location = new Point(449, 89);
-            LblMood.Name = "LblMood";
-            LblMood.Size = new Size(38, 15);
-            LblMood.TabIndex = 8;
-            LblMood.Text = "기분 :";
+            txtDiary.Location = new Point(291, 137);
+            txtDiary.Name = "txtDiary";
+            txtDiary.Size = new Size(276, 23);
+            txtDiary.TabIndex = 8;
+            txtDiary.Leave += txtDiary_Leave;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(291, 119);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 15);
+            label1.TabIndex = 9;
+            label1.Text = "한 줄 일기";
+            // 
+            // clbTasks
+            // 
+            clbTasks.BorderStyle = BorderStyle.None;
+            clbTasks.CheckOnClick = true;
+            clbTasks.FormattingEnabled = true;
+            clbTasks.Location = new Point(291, 192);
+            clbTasks.Name = "clbTasks";
+            clbTasks.Size = new Size(276, 180);
+            clbTasks.TabIndex = 10;
+            clbTasks.ItemCheck += clbTasks_ItemCheck;
+            clbTasks.SelectedIndexChanged += clbTasks_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(291, 174);
+            label2.Name = "label2";
+            label2.Size = new Size(63, 15);
+            label2.TabIndex = 11;
+            label2.Text = "할 일 목록";
+            // 
+            // txtTask
+            // 
+            txtTask.Location = new Point(291, 382);
+            txtTask.Name = "txtTask";
+            txtTask.Size = new Size(176, 23);
+            txtTask.TabIndex = 12;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(473, 382);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(45, 23);
+            btnAdd.TabIndex = 13;
+            btnAdd.Text = "추가";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnDel
+            // 
+            btnDel.Location = new Point(522, 382);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(45, 23);
+            btnDel.TabIndex = 14;
+            btnDel.Text = "삭제";
+            btnDel.UseVisualStyleBackColor = true;
+            btnDel.Click += btnDel_Click;
             // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(584, 461);
-            Controls.Add(LblMood);
+            Controls.Add(btnDel);
+            Controls.Add(btnAdd);
+            Controls.Add(txtTask);
+            Controls.Add(label2);
+            Controls.Add(clbTasks);
+            Controls.Add(label1);
+            Controls.Add(txtDiary);
             Controls.Add(LblSelectDate);
-            Controls.Add(picMood);
             Controls.Add(monthCalendar1);
-            Controls.Add(cboMood);
             Controls.Add(picWeather);
             Controls.Add(LblWeather);
             Controls.Add(cboWeather);
@@ -188,11 +233,11 @@
             MaximizeBox = false;
             Name = "FrmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MoodPlan";
+            Text = "DiaryPlan";
+            FormClosing += FrmMain_FormClosing;
             Load += FrmMain_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)picWeather).EndInit();
-            ((System.ComponentModel.ISupportInitialize)picMood).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,9 +253,13 @@
         private Label LblWeather;
         private PictureBox picWeather;
         private MonthCalendar monthCalendar1;
-        private ComboBox cboMood;
-        private PictureBox picMood;
         private Label LblSelectDate;
-        private Label LblMood;
+        private TextBox txtDiary;
+        private Label label1;
+        private CheckedListBox clbTasks;
+        private Label label2;
+        private TextBox txtTask;
+        private Button btnAdd;
+        private Button btnDel;
     }
 }
