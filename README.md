@@ -1077,7 +1077,7 @@ IoT 개발자 C#/WinApp 리포지토리 2025
 ## 10일차
 
 ### Toy Project
-##### 1. 데일리 플래너 ToDoDiary (todo list + 한 줄 일기)
+#### 1. 데일리 플래너 ToDoDiary (todo list + 한 줄 일기)
 - 날짜별 하루 한 줄 일기와 할 일 관리를 함께 할 수 있는 윈앱 일정 관리 플래너.
 
 <img src="./image/pr01.png" width="600">
